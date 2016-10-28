@@ -1,0 +1,6 @@
+name: cookie-cutter
+dependencies:
+- xarray
+- jupyter
+- xlrd
+- pyart
