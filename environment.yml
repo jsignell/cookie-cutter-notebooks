@@ -1,8 +1,18 @@
 name: cookie-cutter
+channels:
+- conda-forge
+- defaults
 dependencies:
+- numpy
+- pandas
 - xarray
-- jupyter
+- arm_pyart
 - xlrd
-- pyart
 - matplotlib
-
+- jupyter
+- cython
+- wget
+- lxml
+- pyproj
+- pip:
+  - git+git://github.com/CSU-Radarmet/CSU_RadarTools.git
