@@ -34,6 +34,10 @@ def calculate_freq(ds, freq='5min', buffer='1H'):
         df_freq[start_nan_time: end_nan_time] = np.nan
 
     ds_freq.rain_gage.values = np.array([df_freq.values]).T
+    
+    # keep those coords!
+    ds_freq = ds_freq.assign_coords(lat=ds['lat'])
+
     return ds_freq
 
 
@@ -54,6 +58,7 @@ def freq_from_tips(path, files, freq='5min', buffer='1H'):
         ds = xr.open_dataset(os.path.join(path, file))
         ds_freq = calculate_freq(ds, freq, buffer)
         ds_list.append(ds_freq)
+
     ds_freq = xr.concat(ds_list, 'station')
     ds_freq.rain_gage.attrs = ds.rain_gage.attrs
     ds_freq.rain_gage.attrs.update({'calc_from_tips': True,
